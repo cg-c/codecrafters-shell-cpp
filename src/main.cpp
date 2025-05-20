@@ -6,7 +6,15 @@
 #include <cstdlib>
 #include <cstring>
 
-std::string GetPath(std::vector<std::string> paths, std::string file) {
+std::string GetPath(char* p, std::string file) {
+  char* tokens = strtok(p, ":");
+  std::vector<std::string> paths;
+
+  while (tokens != nullptr) {
+    paths.push_back(tokens);
+    tokens = strtok(nullptr, ":");
+  }
+
   for (std::string path: paths) {
     for (const auto& entry: std::filesystem::directory_iterator(path)) {
       if (entry.path().stem() == file) {
@@ -14,8 +22,6 @@ std::string GetPath(std::vector<std::string> paths, std::string file) {
       }
     }
   }
-
-  for (std::string path: paths)  std::cout << path << " ";
   return "";
 }
 
@@ -34,16 +40,8 @@ int main() {
 
     if (input.substr(0,4) == "type") {
       char* p = std::getenv("PATH");
-      char* tokens = strtok(p, ":");
-      std::vector<std::string> paths;
       std::string file = input.substr(5);
-
-      while (tokens != nullptr) {
-        paths.push_back(tokens);
-        tokens = strtok(nullptr, ":");
-      }
-
-      std::string filePath = GetPath(paths, file);
+      std::string filePath = GetPath(p, file);
 
       if (filePath == "") std::cout << file << ": not found" << std::endl;
       else std::cout << file << " is " << filePath << std::endl;
