@@ -37,7 +37,7 @@ int main() {
 
     if (input.substr(0,4) == "type") {
       std::string command = input.substr(5);
-      if (command == "echo" || command == "type" || command == "exit") std::cout << command << " is a shell builtin" << std::endl;
+      if (command == "echo" || command == "type" || command == "exit" || command == "pwd") std::cout << command << " is a shell builtin" << std::endl;
       else {
         char* p = std::getenv("PATH");
         std::string filePath = GetPath(p, command);
