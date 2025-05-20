@@ -7,19 +7,10 @@
 #include <cstring>
 
 std::string GetPath(char* p, std::string file) {
-  // char* tokens = strtok(p, ":");
   std::vector<std::string> paths;
   std::stringstream ss(p);
   std::string token = "";
   while (std::getline(ss, token, ':')) paths.push_back(token);
-
-
-  // while (tokens != nullptr) {
-  //   paths.push_back(tokens);
-  //   tokens = strtok(nullptr, ":");
-  // }
-
-
 
   for (std::string path: paths) {
     for (const auto& entry: std::filesystem::directory_iterator(path)) {
@@ -54,11 +45,11 @@ int main() {
         if (filePath == "") std::cout << command << ": not found" << std::endl;
         else std::cout << command << " is " << filePath << std::endl;
       }
-      
     }
     else {
       if (input == "exit 0") return 0;
       else if (input.substr(0, 4) == "echo") std::cout << input.substr(5) << std::endl;
+      else if (GetPath(std::getenv("PATH"), input.substr(0, input.find(" "))) != "") system(input.c_str());
       else std::cout << input << ": command not found" << std::endl;
     }
   }
