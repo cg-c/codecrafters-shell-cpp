@@ -54,6 +54,9 @@ int main() {
       else if (input == "pwd") std::cout << std::filesystem::current_path().string() << std::endl;
       else if (input.substr(0, 2) == "cd") {
         std::string path = input.substr(3);
+        
+        if (path == "~") path = std::getenv("HOME");
+
         std::filesystem::directory_entry entry(path);
 
         if (entry.exists()) std::filesystem::current_path(path);
