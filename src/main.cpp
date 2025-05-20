@@ -22,8 +22,8 @@ int main() {
       std::string currPath = p.generic_string();
       std::string file = input.substr(5);
 
-      if (currPath.find(file) != std::string::npos) return currPath.substr(0, currPath.find(file) + file.length());
-      else return std::cout << file << ": not found" << std::endl;
+      if (currPath.find(file) != std::string::npos) std::cout << currPath.substr(0, currPath.find(file) + file.length()) << std::endl;
+      else std::cout << file << ": not found" << std::endl;
 
     }
     else {
