@@ -14,6 +14,8 @@ std::string GetPath(std::vector<std::string> paths, std::string file) {
       }
     }
   }
+
+  for (std::string path: paths) { std::cout << path << " ";
   return "";
 }
 
@@ -35,8 +37,6 @@ int main() {
       char* tokens = strtok(p, ":");
       std::vector<std::string> paths;
       std::string file = input.substr(5);
-
-      std::cout << p << std::endl;
 
       while (tokens != nullptr) {
         paths.push_back(tokens);
