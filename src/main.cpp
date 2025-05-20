@@ -19,14 +19,25 @@ int main() {
     std::getline(std::cin, input);
 
     if (input.substr(0,4) == "type") {
-      char *p = std::getenv("PATH");
-      std::string currPath(p);
+      char* p = std::getenv("PATH");
+      char* tokens = strtok(p, ':');
+      std::vector<std::string> paths;
       std::string file = input.substr(5);
-      std::cout << currPath << std::endl;
-      std::cout << p << std::endl;
 
-      if (currPath.find(file) != std::string::npos) std::cout << currPath.substr(0, currPath.find(file) + file.length()) << std::endl;
-      else std::cout << file << ": not found" << std::endl;
+      while (tokens != nullptr) {
+        paths.push_back(tokens);
+        tokens = strtok(nullptr, ':');
+      }
+
+      for (std::string path: paths) {
+        for (const auto& entry: std::filesystem::directory_iterator(path)) {
+          if (entry.path().stem() == "file") {
+            std::cout << entry.path().parent_path().string() << "/" << file << std::endl;
+            return;
+          }
+        }
+      }
+      std::cout << file << ": not found" << std::endl;
     }
     else {
       if (input == "exit 0") return 0;
