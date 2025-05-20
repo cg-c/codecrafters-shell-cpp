@@ -45,12 +45,16 @@ int main() {
     std::getline(std::cin, input);
 
     if (input.substr(0,4) == "type") {
-      char* p = std::getenv("PATH");
-      std::string file = input.substr(5);
-      std::string filePath = GetPath(p, file);
+      std::string command = input.substr(5);
+      if (command == "echo" || command == "type" || command == "exit") std::cout << command << " is a shell builtin" << std::endl;
+      else {
+        char* p = std::getenv("PATH");
+        std::string filePath = GetPath(p, command);
 
-      if (filePath == "") std::cout << file << ": not found" << std::endl;
-      else std::cout << file << " is " << filePath << std::endl;
+        if (filePath == "") std::cout << command << ": not found" << std::endl;
+        else std::cout << command << " is " << filePath << std::endl;
+      }
+      
     }
     else {
       if (input == "exit 0") return 0;
