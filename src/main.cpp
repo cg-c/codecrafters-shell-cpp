@@ -19,10 +19,10 @@ int main() {
 
     if (input.substr(0,4) == "type") {
       std::filesystem::path p = std::filesystem::current_path();
-      std::string currPath = p.to_string();
+      std::string currPath = p.generic_string();
       std::string file = input.substr(5);
 
-      if (p.find(file) != std::String::npos) return p.substr(0, p.find(file) + file.length());
+      if (currPath.find(file) != std::String::npos) return currPath.substr(0, currPath.find(file) + file.length());
       else return std::cout << file << ": not found" << std::endl;
 
     }

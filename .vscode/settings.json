@@ -45,6 +45,7 @@
         "xmemory": "cpp",
         "xstddef": "cpp",
         "xtr1common": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "xtree": "cpp"
     }
 }
