@@ -49,6 +49,7 @@ int main() {
     else {
       if (input == "exit 0") return 0;
       else if (input.substr(0, 4) == "echo") std::cout << input.substr(5) << std::endl;
+      else if (input == "pwd") std::cout << std::filesystem::current_path();
       else if (GetPath(std::getenv("PATH"), input.substr(0, input.find(" "))) != "") system(input.c_str());
       else std::cout << input << ": command not found" << std::endl;
     }
