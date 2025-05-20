@@ -15,7 +15,7 @@ std::string GetPath(std::vector<std::string> paths, std::string file) {
     }
   }
 
-  for (std::string path: paths) { std::cout << path << " ";
+  for (std::string path: paths)  std::cout << path << " ";
   return "";
 }
 
