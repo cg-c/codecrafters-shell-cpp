@@ -7,14 +7,15 @@ int main() {
   std::cerr << std::unitbuf;
 
   // Uncomment this block to pass the first stage
-  
+  std::vector<std::string> valid = {"exit", "type", "echo"};
 
   while (true) {
     std::cout << "$ ";
     std::string input;
     std::getline(std::cin, input);
-    if (input == "exit 0") return 0;
-    else if (input.substr(0, 4) == "echo") std::cout << input.substr(5) << std::endl;
+    std::string command = input.find("type" + 1);
+
+    if (std::find(valid.begin(), valid.end(), command) != valid.end()) std::cout << command << " is a shell builtin" << std::endl;
     else std::cout << input << ": command not found" << std::endl;
   }
 }
