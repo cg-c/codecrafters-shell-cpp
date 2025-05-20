@@ -36,9 +36,10 @@ int main() {
       std::vector<std::string> paths;
       std::string file = input.substr(5);
 
+      std::cout << p << std::endl;
+
       while (tokens != nullptr) {
         paths.push_back(tokens);
-        std::cout << tokens << " ";
         tokens = strtok(nullptr, ":");
       }
 
