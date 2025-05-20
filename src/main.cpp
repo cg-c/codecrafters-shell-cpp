@@ -22,6 +22,8 @@ int main() {
       char *p = std::getenv("PATH");
       std::string currPath(p);
       std::string file = input.substr(5);
+      std::cout << currPath << std::endl;
+      std::cout << p << std::endl;
 
       if (currPath.find(file) != std::string::npos) std::cout << currPath.substr(0, currPath.find(file) + file.length()) << std::endl;
       else std::cout << file << ": not found" << std::endl;
