@@ -30,15 +30,12 @@ int main() {
         tokens = strtok(nullptr, ":");
       }
 
-      for (std::string path: paths) {
-        for (const auto& entry: std::filesystem::directory_iterator(path)) {
-          if (entry.path().stem() == "file") {
-            std::cout << entry.path().parent_path().string() << "/" << file << std::endl;
-            return;
-          }
-        }
-      }
-      std::cout << file << ": not found" << std::endl;
+      std::string filePath = GetPath(paths, file);
+
+      if (filePath == "") std::cout << file << ": not found" << std::endl;
+      else std::cout << file << " is " << filePath << std::endl;
+      
+      
     }
     else {
       if (input == "exit 0") return 0;
@@ -46,4 +43,16 @@ int main() {
       else std::cout << input << ": command not found" << std::endl;
     }
   }
+}
+
+
+std::string GetPath(std::vector<std::string> paths, std::string file) {
+  for (std::string path: paths) {
+    for (const auto& entry: std::filesystem::directory_iterator(path)) {
+      if (entry.path().stem() == file) {
+        return entry.path().parent_path().string() + "/" + file;
+      }
+    }
+  }
+  return "";
 }
