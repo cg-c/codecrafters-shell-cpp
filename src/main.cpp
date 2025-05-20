@@ -28,7 +28,9 @@ int main() {
   std::cerr << std::unitbuf;
 
   // Uncomment this block to pass the first stage
-  std::vector<std::string> valid = {"exit", "type", "echo"};
+
+  // std::vector<std::string> valid = {"exit", "type", "echo", "pwd", "cd"};
+  // switch to find in vector 
 
   while (true) {
     std::cout << "$ ";
@@ -37,7 +39,7 @@ int main() {
 
     if (input.substr(0,4) == "type") {
       std::string command = input.substr(5);
-      if (command == "echo" || command == "type" || command == "exit" || command == "pwd") std::cout << command << " is a shell builtin" << std::endl;
+      if (command == "echo" || command == "type" || command == "exit" || command == "pwd" || command == "cd") std::cout << command << " is a shell builtin" << std::endl;
       else {
         char* p = std::getenv("PATH");
         std::string filePath = GetPath(p, command);
@@ -50,6 +52,13 @@ int main() {
       if (input == "exit 0") return 0;
       else if (input.substr(0, 4) == "echo") std::cout << input.substr(5) << std::endl;
       else if (input == "pwd") std::cout << std::filesystem::current_path().string() << std::endl;
+      else if (input.substr(0, 2) == "cd") {
+        std::string path = input.substr(3);
+        std::filesystem::directory_entry entry(path);
+
+        if (entry.exists()) std::filesystem::current_path(path);
+        else std::cout << "cd: " << path << ": No such file or directory" << std::endl;
+      }
       else if (GetPath(std::getenv("PATH"), input.substr(0, input.find(" "))) != "") system(input.c_str());
       else std::cout << input << ": command not found" << std::endl;
     }
