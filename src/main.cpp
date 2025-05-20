@@ -16,7 +16,7 @@ int main() {
     std::string input;
     std::getline(std::cin, input);
 
-    if (input.find("type") != std::String::npos) {
+    if (input.find("type") != std::string::npos) {
       std::string command = input.substr(5);
       if (std::find(valid.begin(), valid.end(), command) != valid.end()) std::cout << command << " is a shell builtin" << std::endl;
       else std::cout << command << ": not found" << std::endl;
