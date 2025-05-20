@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <filesystem>
+#include <cstdlib>
 
 int main() {
   // Flush after every std::cout / std:cerr
@@ -18,13 +19,12 @@ int main() {
     std::getline(std::cin, input);
 
     if (input.substr(0,4) == "type") {
-      std::filesystem::path p = std::filesystem::current_path();
-      std::string currPath = p.generic_string();
+      char *p = std::getenv("PATH");
+      std::string currPath(p);
       std::string file = input.substr(5);
 
       if (currPath.find(file) != std::string::npos) std::cout << currPath.substr(0, currPath.find(file) + file.length()) << std::endl;
       else std::cout << file << ": not found" << std::endl;
-
     }
     else {
       if (input == "exit 0") return 0;
