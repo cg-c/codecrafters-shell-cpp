@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <filesystem>
 #include <cstdlib>
+#include <cstring>
 
 int main() {
   // Flush after every std::cout / std:cerr
@@ -20,13 +21,13 @@ int main() {
 
     if (input.substr(0,4) == "type") {
       char* p = std::getenv("PATH");
-      char* tokens = strtok(p, ':');
+      char* tokens = strtok(p, ":");
       std::vector<std::string> paths;
       std::string file = input.substr(5);
 
       while (tokens != nullptr) {
         paths.push_back(tokens);
-        tokens = strtok(nullptr, ':');
+        tokens = strtok(nullptr, ":");
       }
 
       for (std::string path: paths) {
