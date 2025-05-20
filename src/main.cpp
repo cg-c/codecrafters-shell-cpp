@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 int main() {
   // Flush after every std::cout / std:cerr
@@ -13,7 +14,7 @@ int main() {
     std::cout << "$ ";
     std::string input;
     std::getline(std::cin, input);
-    std::string command = input.find("type" + 1);
+    std::string command = input.substr(input.find("type" + 1));
 
     if (std::find(valid.begin(), valid.end(), command) != valid.end()) std::cout << command << " is a shell builtin" << std::endl;
     else std::cout << input << ": command not found" << std::endl;
