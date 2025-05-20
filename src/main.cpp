@@ -38,6 +38,7 @@ int main() {
 
       while (tokens != nullptr) {
         paths.push_back(tokens);
+        std::cout << tokens << " ";
         tokens = strtok(nullptr, ":");
       }
 
@@ -45,8 +46,6 @@ int main() {
 
       if (filePath == "") std::cout << file << ": not found" << std::endl;
       else std::cout << file << " is " << filePath << std::endl;
-      
-      
     }
     else {
       if (input == "exit 0") return 0;
