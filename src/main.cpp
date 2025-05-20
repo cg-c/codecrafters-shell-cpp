@@ -7,13 +7,19 @@
 #include <cstring>
 
 std::string GetPath(char* p, std::string file) {
-  char* tokens = strtok(p, ":");
+  // char* tokens = strtok(p, ":");
   std::vector<std::string> paths;
+  std::stringstream ss(p);
+  std::string token = "";
+  while (std::getline(ss, token, ':')) paths.push_back(token);
 
-  while (tokens != nullptr) {
-    paths.push_back(tokens);
-    tokens = strtok(nullptr, ":");
-  }
+
+  // while (tokens != nullptr) {
+  //   paths.push_back(tokens);
+  //   tokens = strtok(nullptr, ":");
+  // }
+
+
 
   for (std::string path: paths) {
     for (const auto& entry: std::filesystem::directory_iterator(path)) {
