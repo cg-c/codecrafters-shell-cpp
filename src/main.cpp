@@ -18,6 +18,6 @@ int main() {
     std::string command = input.substr(5);
 
     if (std::find(valid.begin(), valid.end(), command) != valid.end()) std::cout << command << " is a shell builtin" << std::endl;
-    else std::cout << command << ": command not found" << std::endl;
+    else std::cout << command << ": not found" << std::endl;
   }
 }
