@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <filesystem>
 
 int main() {
   // Flush after every std::cout / std:cerr
@@ -16,10 +17,14 @@ int main() {
     std::string input;
     std::getline(std::cin, input);
 
-    if (input.find("type") != std::string::npos) {
-      std::string command = input.substr(5);
-      if (std::find(valid.begin(), valid.end(), command) != valid.end()) std::cout << command << " is a shell builtin" << std::endl;
-      else std::cout << command << ": not found" << std::endl;
+    if (input.substr(0,4) == "type") {
+      std::filesystem::path p = std::filesystem::current_path();
+      std::string currPath = p.to_string();
+      std::string file = input.substr(5);
+
+      if (p.find(file) != std::String::npos) return p.substr(0, p.find(file) + file.length());
+      else return std::cout << file << ": not found" << std::endl;
+
     }
     else {
       if (input == "exit 0") return 0;
