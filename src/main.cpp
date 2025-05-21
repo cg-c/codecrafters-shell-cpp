@@ -29,7 +29,7 @@ std::string Quotes(std::string input, char delime) {
       }
       between = !between;
     }
-    else if (c == ' ' && !between) continue;
+    else if (c == ' ' && !between) ans += ' ';
     else curr += c;
   }
   return ans;
