@@ -85,9 +85,6 @@ int main() {
     else if (input == "exit 0") return 0;
     else if (tokens[0] == "echo") {
       if (tokens[1].at(0) == '\'' && input[input.size() - 1] == '\''){
-        // std::vector<std::string> print = GetTokens(input.substr(5), '\'');
-        // for (std::string p: print) std::cout << p;
-        // std::cout << std::endl;
         std::string print = Quotes(input.substr(5), '\'');
         std::cout << print << std::endl;
       }
@@ -96,12 +93,15 @@ int main() {
         std::cout << print << std::endl;
       }
       else { 
-        std::cout << tokens[1];
-        for (int i = 2; i < tokens.size(); i++) {
-          if (tokens[i] == "") continue;
-          std::cout << " " << tokens[i];
+        input = input.substr(5);
+        std::string print = "";
+        
+        for (char c: input) {
+          if (c == '\\') print += ' ';
+          else print += c;
         }
-        std::cout << std::endl;
+
+        std::cout << print << std::endl;
       }
     }
     else if (tokens[0] == "pwd") std::cout << std::filesystem::current_path().string() << std::endl;
