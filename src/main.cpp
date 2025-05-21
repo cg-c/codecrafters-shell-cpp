@@ -61,7 +61,7 @@ int main() {
           std::string t = tokens[i];
 
           if (t[0] == '\'' ) t = t.substr(1);
-          if (t[t.size() - 1] == '\'') t = t.subtr(0, t.size() - 1);
+          if (t[t.size() - 1] == '\'') t = t.substr(0, t.size() - 1);
           std::cout << t << " "; 
         }
         std::cout << std::endl;
