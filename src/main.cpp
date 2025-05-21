@@ -35,6 +35,7 @@ std::string Quotes(std::string input, char delime) {
       while (input[i] == ' ' && i < input.size()) {
         i++;
       }
+      i--;
       ans += ' ';
     }
     else curr += c;
