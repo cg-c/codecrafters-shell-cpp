@@ -50,11 +50,14 @@ int main() {
     }
     else {
       if (input == "exit 0") return 0;
-      else if (input.substr(0, 4) == "echo") std::cout << input.substr(5) << std::endl;
+      else if (input.substr(0, 4) == "echo") {
+        if (input[5] == '\'' && input[input.size() - 1] == '\'') std::cout << input.substr(5, input.size() - 6) << std::endl;
+        else std::cout << input.substr(5) << std::endl;
+      }
       else if (input == "pwd") std::cout << std::filesystem::current_path().string() << std::endl;
       else if (input.substr(0, 2) == "cd") {
         std::string path = input.substr(3);
-        
+
         if (path == "~") path = std::getenv("HOME");
 
         std::filesystem::directory_entry entry(path);
