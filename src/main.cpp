@@ -97,7 +97,7 @@ int main() {
         std::string print = "";
         
         for (char c: input) {
-          if (c == '\\') print += ' ';
+          if (c == '\\') continue;
           else print += c;
         }
 
