@@ -64,7 +64,13 @@ int main() {
         }
         std::cout << std::endl;
       }
-      else std::cout << input.substr(5) << std::endl;
+      else {
+        std::cout << tokens[1];
+        for (int i = 2; i < tokens.size(); i++) {
+          std::cout << " " << tokens[i];
+        }
+        std::cout << std::endl;
+      }
     }
     else if (tokens[0] == "pwd") std::cout << std::filesystem::current_path().string() << std::endl;
     else if (tokens[0] == "cd") {
