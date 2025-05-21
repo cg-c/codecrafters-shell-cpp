@@ -25,10 +25,10 @@ std::string Quotes(std::string input, char delime) {
     char c = input[i];
 
     if (c == delime) {
-      if (between) {
+      // if (between) {
         ans += curr;
         curr = "";
-      }
+      // }
       between = !between;
     }
     else if (c == ' ' && !between) {
