@@ -38,7 +38,10 @@ std::string Quotes(std::string input, char delime) {
       i--;
       ans += ' ';
     }
-    else curr += c;
+    else {
+      if (c == '\\') c = input[++i];
+      curr += c;
+     }
   }
   return ans;
 }
