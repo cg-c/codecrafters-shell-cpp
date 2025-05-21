@@ -5,6 +5,7 @@
 #include <filesystem>
 #include <cstdlib>
 #include <cstring>
+#include <sstream>
 
 std::vector<std::string> GetTokens(std::string input, char delime) {
   std::stringstream ss(input);
@@ -62,7 +63,7 @@ int main() {
       else { 
         std::cout << tokens[1];
         for (int i = 2; i < tokens.size(); i++) {
-          if (tokens[i] == " " || tokens[i] == "\n" || tokens[i] == "\t") continue;
+          if (tokens[i] == "") continue;
           std::cout << " " << tokens[i];
         }
         std::cout << std::endl;
