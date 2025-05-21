@@ -39,7 +39,7 @@ std::string Quotes(std::string input, char delime) {
       ans += ' ';
     }
     else {
-      if (c == '\\') c = input[++i];
+      if (c == '\\' && delime == '\"') c = input[++i];
       curr += c;
      }
   }
