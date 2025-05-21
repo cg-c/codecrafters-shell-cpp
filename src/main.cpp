@@ -51,7 +51,7 @@ int main() {
     else {
       if (input == "exit 0") return 0;
       else if (input.substr(0, 4) == "echo") {
-        if (input[5] == '\'' && input[input.size() - 1] == '\'') std::cout << input.substr(5, input.size() - 6) << std::endl;
+        if (input[5] == '\'' && input[input.size() - 1] == '\'') std::cout << input.substr(6, input.size() - 7) << std::endl;
         else std::cout << input.substr(5) << std::endl;
       }
       else if (input == "pwd") std::cout << std::filesystem::current_path().string() << std::endl;
