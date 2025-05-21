@@ -67,6 +67,7 @@ int main() {
       else {
         std::cout << tokens[1];
         for (int i = 2; i < tokens.size(); i++) {
+          if (tokens[i] == " ") continue;
           std::cout << " " << tokens[i];
         }
         std::cout << std::endl;
