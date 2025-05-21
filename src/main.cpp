@@ -6,6 +6,14 @@
 #include <cstdlib>
 #include <cstring>
 
+std::vector<std::string> GetTokens(std::string input, char delime) {
+  std::stringstream ss(input);
+  std::string token = "";
+  std::vector<std::string> tokens;
+  while (std::getline(ss, token, delime)) tokens.push_back(token);
+  return tokens;
+}
+
 std::string GetPath(char* p, std::string file) {
   std::vector<std::string> paths = GetTokens(p, ':');
 
@@ -17,14 +25,6 @@ std::string GetPath(char* p, std::string file) {
     }
   }
   return "";
-}
-
-std::vector<std::string> GetTokens(std::string input, char delime) {
-  std::stringstream ss(input);
-  std::string token = "";
-  std::vector<std::string> tokens;
-  while (std::getline(ss, token, delime)) tokens.push_back(token);
-  return tokens;
 }
 
 int main() {
@@ -57,17 +57,17 @@ int main() {
     else if (tokens[0] == "echo") {
       if (tokens[1].at(0) == '\'' && input[input.size() - 1] == '\''){
         std::cout << tokens[1].substr(1);
-        for (string t: tokens) {
+        for (std::string t: tokens) {
           if (t[t.size() - 1] == '\'') std::cout << t.substr(0, t.size() - 1);
           else std::cout << t;
         }
-        std::cout << endl;
+        std::cout << std::endl;
       }
       else std::cout << input.substr(5) << std::endl;
     }
     else if (tokens[0] == "pwd") std::cout << std::filesystem::current_path().string() << std::endl;
     else if (tokens[0] == "cd") {
-      if (tokens[1] == "~") path = std::getenv("HOME");
+      if (tokens[1] == "~") tokens[1] = std::getenv("HOME");
 
       std::filesystem::directory_entry entry(tokens[1]);
 
