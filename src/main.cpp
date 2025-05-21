@@ -21,7 +21,9 @@ std::string Quotes(std::string input, char delime) {
   std::string curr = "";
   bool between = false;
 
-  for (char c: input) {
+  for (int i = 0; i < input.size(); i++) {
+    char c = input[i];
+
     if (c == delime) {
       if (between) {
         ans += curr;
@@ -29,7 +31,12 @@ std::string Quotes(std::string input, char delime) {
       }
       between = !between;
     }
-    else if (c == ' ' && !between) ans += ' ';
+    else if (c == ' ' && !between) {
+      while (input[i] == ' ' && i < input.size()) {
+        i++;
+      }
+      ans += " ";
+    }
     else curr += c;
   }
   return ans;
