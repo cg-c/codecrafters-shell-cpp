@@ -16,6 +16,25 @@ std::vector<std::string> GetTokens(std::string input, char delime) {
   return tokens;
 }
 
+std::string Quotes(std::string input, char delime) {
+  std::string ans = "";
+  std::string curr = "";
+  bool between = false;
+
+  for (char c: input) {
+    if (c == delime) {
+      if (between) {
+        ans += curr;
+        curr = "";
+      }
+      between = !between;
+    }
+    else if (c == ' ' && !between) continue;
+    else curr += c;
+  }
+  return ans;
+}
+
 std::string GetPath(char* p, std::string file) {
   std::vector<std::string> paths = GetTokens(p, ':');
 
@@ -58,17 +77,15 @@ int main() {
     else if (input == "exit 0") return 0;
     else if (tokens[0] == "echo") {
       if (tokens[1].at(0) == '\'' && input[input.size() - 1] == '\''){
-        std::vector<std::string> print = GetTokens(input.substr(5), '\'');
-        for (std::string p: print) std::cout << p;
-        std::cout << std::endl;
+        // std::vector<std::string> print = GetTokens(input.substr(5), '\'');
+        // for (std::string p: print) std::cout << p;
+        // std::cout << std::endl;
+        std::string print = Quotes(input.substr(5), '\'');
+        std::cout << print << std::endl;
       }
       else if (tokens[1].at(0) == '\"' && input[input.size() - 1] == '\"') {
-        std::vector<std::string> print = GetTokens(input.substr(5), '\"');
-        for (std::string p: print) {
-          if (std::isspace(p)) continue;
-          std::cout << p;
-        }
-        std::cout << std::endl;
+        std::string print = Quotes(input.substr(5), '\"');
+        std::cout << print << std::endl;
       }
       else { 
         std::cout << tokens[1];
