@@ -57,8 +57,14 @@ int main() {
     else if (input == "exit 0") return 0;
     else if (tokens[0] == "echo") {
       if (tokens[1].at(0) == '\'' && input[input.size() - 1] == '\''){
-        int first = input.find_first_of("\'");
-        std::cout << input.substr(first + 1, input.size() - first - 2) << std::endl;
+        for (int i = 1; i < tokens.size(); i++) {
+          std::string t = tokens[i];
+
+          if (t[0] == '\'' ) t = t.substr(1);
+          if (t[t.size() - 1] == '\'') t = t.subtr(0, t.size() - 1);
+          std::cout << t << " "; 
+        }
+        std::cout << std::endl;
       }
       else { 
         std::cout << tokens[1];
