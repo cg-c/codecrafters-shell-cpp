@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <sstream>
+#include <cctype>
 
 std::vector<std::string> GetTokens(std::string input, char delime) {
   std::stringstream ss(input);
