@@ -57,13 +57,8 @@ int main() {
     else if (input == "exit 0") return 0;
     else if (tokens[0] == "echo") {
       if (tokens[1].at(0) == '\'' && input[input.size() - 1] == '\''){
-        for (int i = 1; i < tokens.size(); i++) {
-          std::string t = tokens[i];
-
-          if (t[0] == '\'' ) t = t.substr(1);
-          if (t[t.size() - 1] == '\'') t = t.substr(0, t.size() - 1);
-          std::cout << t << " "; 
-        }
+        std::vector<string> print = GetTokens(input.substr(5), '\'');
+        for (std::string p: print) std::cout << p;
         std::cout << std::endl;
       }
       else { 
