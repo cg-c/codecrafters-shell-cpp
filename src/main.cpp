@@ -96,8 +96,16 @@ int main() {
         input = input.substr(5);
         std::string print = "";
         
-        for (char c: input) {
-          if (c == '\\') continue;
+        for (int i = 0; i < input.size(); i++) {
+          char c = input[i];
+          if (c == '\\') {
+            print += input[++i];
+          }
+          else if (c == ' ') {
+            while (input[i] == ' ' && i < input.size()) i++;
+            i--;
+            print += ' ';
+          }
           else print += c;
         }
 
