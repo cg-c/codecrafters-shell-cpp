@@ -7,10 +7,7 @@
 #include <cstring>
 
 std::string GetPath(char* p, std::string file) {
-  std::vector<std::string> paths;
-  std::stringstream ss(p);
-  std::string token = "";
-  while (std::getline(ss, token, ':')) paths.push_back(token);
+  std::vector<std::string> paths = GetTokens(p, ':');
 
   for (std::string path: paths) {
     for (const auto& entry: std::filesystem::directory_iterator(path)) {
@@ -22,6 +19,14 @@ std::string GetPath(char* p, std::string file) {
   return "";
 }
 
+std::vector<std::string> GetTokens(std::string input, char delime) {
+  std::stringstream ss(input);
+  std::string token = "";
+  std::vector<std::string> tokens;
+  while (std::getline(ss, token, delime)) tokens.push_back(token);
+  return tokens;
+}
+
 int main() {
   // Flush after every std::cout / std:cerr
   std::cout << std::unitbuf;
@@ -29,44 +34,47 @@ int main() {
 
   // Uncomment this block to pass the first stage
 
-  // std::vector<std::string> valid = {"exit", "type", "echo", "pwd", "cd"};
-  // switch to find in vector 
+  std::vector<std::string> commands = {"exit", "type", "echo", "pwd", "cd"};
 
   while (true) {
     std::cout << "$ ";
     std::string input;
     std::getline(std::cin, input);
+    std::vector<std::string> tokens = GetTokens(input, ' ');
 
-    if (input.substr(0,4) == "type") {
-      std::string command = input.substr(5);
-      if (command == "echo" || command == "type" || command == "exit" || command == "pwd" || command == "cd") std::cout << command << " is a shell builtin" << std::endl;
+    if (tokens[0] == "type") {
+      if (find(commands.begin(), commands.end(), tokens[1]) != commands.end()) std::cout << tokens[1] << " is a shell builtin" << std::endl;
       else {
+        std::string path = input.substr(5);
         char* p = std::getenv("PATH");
-        std::string filePath = GetPath(p, command);
+        std::string filePath = GetPath(p, path);
 
-        if (filePath == "") std::cout << command << ": not found" << std::endl;
-        else std::cout << command << " is " << filePath << std::endl;
+        if (filePath == "") std::cout << path << ": not found" << std::endl;
+        else std::cout << path << " is " << filePath << std::endl;
       }
     }
-    else {
-      if (input == "exit 0") return 0;
-      else if (input.substr(0, 4) == "echo") {
-        if (input[5] == '\'' && input[input.size() - 1] == '\'') std::cout << input.substr(6, input.size() - 7) << std::endl;
-        else std::cout << input.substr(5) << std::endl;
+    else if (input == "exit 0") return 0;
+    else if (tokens[0] == "echo") {
+      if (tokens[1].at(0) == '\'' && input[input.size() - 1] == '\''){
+        std::cout << tokens[1].substr(1);
+        for (string t: tokens) {
+          if (t[t.size() - 1] == '\'') std::cout << t.substr(0, t.size() - 1);
+          else std::cout << t;
+        }
+        std::cout << endl;
       }
-      else if (input == "pwd") std::cout << std::filesystem::current_path().string() << std::endl;
-      else if (input.substr(0, 2) == "cd") {
-        std::string path = input.substr(3);
-
-        if (path == "~") path = std::getenv("HOME");
-
-        std::filesystem::directory_entry entry(path);
-
-        if (entry.exists()) std::filesystem::current_path(path);
-        else std::cout << "cd: " << path << ": No such file or directory" << std::endl;
-      }
-      else if (GetPath(std::getenv("PATH"), input.substr(0, input.find(" "))) != "") system(input.c_str());
-      else std::cout << input << ": command not found" << std::endl;
+      else std::cout << input.substr(5) << std::endl;
     }
+    else if (tokens[0] == "pwd") std::cout << std::filesystem::current_path().string() << std::endl;
+    else if (tokens[0] == "cd") {
+      if (tokens[1] == "~") path = std::getenv("HOME");
+
+      std::filesystem::directory_entry entry(tokens[1]);
+
+      if (entry.exists()) std::filesystem::current_path(tokens[1]);
+      else std::cout << "cd: " << tokens[1] << ": No such file or directory" << std::endl;
+    }
+    else if (GetPath(std::getenv("PATH"), tokens[0]) != "") system(input.c_str());
+    else std::cout << input << ": command not found" << std::endl;
   }
 }
