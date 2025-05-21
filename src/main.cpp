@@ -43,6 +43,9 @@ std::string Quotes(std::string input, char delime) {
       curr += c;
      }
   }
+
+  if (!curr.empty()) ans += curr;
+  
   return ans;
 }
 
