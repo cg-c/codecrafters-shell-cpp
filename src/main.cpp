@@ -61,6 +61,11 @@ int main() {
         for (std::string p: print) std::cout << p;
         std::cout << std::endl;
       }
+      else if (tokens[1].at(0) == '\"' && input[input.size() - 1] == '\"') {
+        std::vector<std::string> print = GetTokens(input.substr(5), '\"');
+        for (std::string p: print) std::cout << p;
+        std::cout << std::endl;
+      }
       else { 
         std::cout << tokens[1];
         for (int i = 2; i < tokens.size(); i++) {
