@@ -133,14 +133,14 @@ int main() {
       if (input[0] == '\'') {
         size_t last = input.find_last_of('\'');
         std::string file = input.substr(last + 1);
-        system(file.c_str());
+        if (GetPath(std::getenv("PATH"), file) != "") system(file.c_str());
       }
       else if (input[0] == '\"') {
         size_t last = input.find_last_of('\"');
         std::string file = input.substr(last + 1);
-        system(file.c_str());
+        if (GetPath(std::getenv("PATH"), file) != "") system(file.c_str());
       }
-      std::cout << input << ": command not found" << std::endl;
+      else std::cout << input << ": command not found" << std::endl;
     }
   }
 }
