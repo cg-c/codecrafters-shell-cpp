@@ -101,7 +101,7 @@ int main() {
         std::string output = "";
         
         if (tokens[1].at(0) == '\'') {
-          std::cout << "" << endl;
+          std::cout << "" << std::endl;
         }
         else  {
           file = input.substr(5, errRedirect - 7);
