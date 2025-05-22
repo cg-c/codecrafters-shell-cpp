@@ -112,12 +112,7 @@ int main() {
         char* p = std::getenv("PATH");
         std::string filePath = GetPath(p, file);
         if (filePath == "") std::cout << file << std::endl;
-        else {
-          std::ofstream f;
-          f.open(file);
-          f << output << std::endl;
-          f.close();
-        }
+        else redirect = errDirect;
       }
       else if (redirect != std::string::npos) {
         std::string output = input.substr(6, redirect - 8);
