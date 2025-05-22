@@ -103,6 +103,7 @@ int main() {
         if (filePath == "") std::cout << file << std::endl;
         else redirct = true;
       }
+      
       if (redirect != std::string::npos) {
         std::string output = input.substr(6, redirect - 8);
         std::string file = tokens[tokens.size() - 1];
