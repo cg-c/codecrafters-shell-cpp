@@ -8,6 +8,7 @@
 #include <sstream>
 #include <cctype>
 #include <unistd.h>
+#include <cstdio>
 
 std::vector<std::string> GetTokens(std::string input, char delime) {
   std::stringstream ss(input);
@@ -91,7 +92,14 @@ int main() {
     }
     else if (input == "exit 0") return 0;
     else if (tokens[0] == "echo") {
-      if (tokens[1].at(0) == '\'' && input[input.size() - 1] == '\''){
+      size_t redirect = input.find("1>");
+
+      if (redirect != std::string::npos) {
+        std::string output = input(5, redirect - 5);
+        std::string file = tokens[tokens.size() - 1];
+        freopen(output, "w", file);
+      }
+      else if (tokens[1].at(0) == '\'' && input[input.size() - 1] == '\''){
         std::string print = Quotes(input.substr(5), '\'');
         std::cout << print << std::endl;
       }
@@ -130,16 +138,7 @@ int main() {
     }
     else if (GetPath(std::getenv("PATH"), tokens[0]) != "") system(input.c_str());
     else {
-      // quotes executable --> execute smt
-      if (input[0] == '\'') {
-        // size_t last = input.find_last_of('\'');
-        // std::string file = input.substr(last + 2);
-        // char* path = std::getenv("PATH");
-        // file = GetPath(path, file);
-        // execv(file.c_str());
-        system(input.c_str());
-      }
-      else if (input[0] == '\"') {
+      if (input[0] == '\'' || input[0] == '\"') {
         system(input.c_str());
       }
       else std::cout << input << ": command not found" << std::endl;
