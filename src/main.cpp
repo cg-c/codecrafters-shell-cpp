@@ -94,16 +94,16 @@ int main() {
     else if (input == "exit 0") return 0;
     else if (tokens[0] == "echo") {
       size_t redirect = input.find("1>");
-      size_t errRedirct = input.find("2>");
+      size_t errRedirect = input.find("2>");
 
       if (errRedirct != std::string::npos) {
-        std::string file = Quotes(input.sub(5, errRedict - 6), '\'');
+        std::string file = Quotes(input.substr(5, errRedirect - 6), '\'');
         char* p = std::getenv("PATH");
         std::string filePath = GetPath(p, file);
         if (filePath == "") std::cout << file << std::endl;
-        else redirct = true;
+        else redirect = true;
       }
-      
+
       if (redirect != std::string::npos) {
         std::string output = input.substr(6, redirect - 8);
         std::string file = tokens[tokens.size() - 1];
