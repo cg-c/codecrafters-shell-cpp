@@ -97,11 +97,16 @@ int main() {
       size_t errRedirect = input.find("2>");
 
       if (errRedirect != std::string::npos) {
-        std::string file = Quotes(input.substr(5, errRedirect - 6), '\'');
-        char* p = std::getenv("PATH");
-        std::string filePath = GetPath(p, file);
-        if (filePath == "") std::cout << file << std::endl;
-        else redirect = true;
+        std::string file = "";
+        if (tokens[1][0] == '\'') {
+          redirect = errRedirect;
+        }
+        else {
+          file = Quotes(input.substr(5, errRedirct - 7));
+          char* p = std::getenv("PATH");
+          std::string filePath = GetPath(p, file);
+          if (filePath == "") std::cout << file << std::endl;
+        }
       }
 
       if (redirect != std::string::npos) {
