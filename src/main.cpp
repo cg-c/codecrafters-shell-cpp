@@ -96,10 +96,12 @@ int main() {
       size_t redirect = input.find("1>");
 
       if (redirect != std::string::npos) {
-        std::string output = input.substr(5, redirect - 5);
-        std::string file = tokens[tokens.size() - 1];
-        std::ofstream outputFile(file);
-        freopen(output.c_str(), "w", outputFile);
+        // std::string output = input.substr(5, redirect - 5);
+        // std::string file = tokens[tokens.size() - 1];
+        // std::ofstream outputFile(file);
+        // freopen(output.c_str(), "w", outputFile);
+        std::string input = input.substr(5);
+        system(input.c_str());
       }
       else if (tokens[1].at(0) == '\'' && input[input.size() - 1] == '\''){
         std::string print = Quotes(input.substr(5), '\'');
