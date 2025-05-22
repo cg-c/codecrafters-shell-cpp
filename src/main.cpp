@@ -134,6 +134,7 @@ int main() {
         size_t last = input.find_last_of('\'');
         std::string file = input.substr(last + 2);
         file = GetPath(std::getenv("PATH"), file);
+        std::cout << file << std::endl;
         // if (GetPath(std::getenv("PATH"), file) != "") 
         system(file.c_str());
       }
