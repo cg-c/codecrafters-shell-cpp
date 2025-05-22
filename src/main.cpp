@@ -101,9 +101,13 @@ int main() {
         std::string output = "";
         
         if (tokens[1].at(0) == '\'') {
-          std::string file = tokens[tokens.size() - 1];
+          file = tokens[tokens.size() - 1];
+          output = input.substr(6, redirect - 8);
+          char* p = std::getenv("PATH");
+          std::string filePath = GetPath(p, file);
           std::ofstream f;
           f.open(file);
+          f << output << std::endl;
           f.close();
         }
         else  {
@@ -117,6 +121,7 @@ int main() {
           else {
             std::ofstream f;
             f.open(file);
+            f << output << std::endl;
             f.close();
           }
         }
