@@ -140,7 +140,7 @@ int main() {
         system(input.c_str());
       }
       else if (input[0] == '\"') {
-        system(input.c_str())
+        system(input.c_str());
       }
       else std::cout << input << ": command not found" << std::endl;
     }
