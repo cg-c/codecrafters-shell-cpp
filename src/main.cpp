@@ -100,6 +100,7 @@ int main() {
         std::string file = "";
         
         if (tokens[1].at(0) == '\'') {
+          std::cout << tokens[0].at(0) << std::endl;
           redirect = errRedirect;
         }
         else {
