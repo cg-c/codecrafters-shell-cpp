@@ -100,9 +100,9 @@ int main() {
         // std::string file = tokens[tokens.size() - 1];
         // std::ofstream outputFile(file);
         // freopen(output.c_str(), "w", outputFile);
-        std::string input = input.substr(5, redirect - 5) + tokens[tokens.size() - 1];
-        std::cout << input << std::endl;
-        system(input.c_str());
+        std::string cmd = input.substr(5, redirect - 5) + input.substr(redirect + 1);
+        std::cout << cmd << std::endl;
+        system(cmd.c_str());
       }
       else if (tokens[1].at(0) == '\'' && input[input.size() - 1] == '\''){
         std::string print = Quotes(input.substr(5), '\'');
