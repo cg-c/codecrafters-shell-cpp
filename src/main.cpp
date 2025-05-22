@@ -102,7 +102,7 @@ int main() {
           redirect = errRedirect;
         }
         else {
-          file = Quotes(input.substr(5, errRedirct - 7));
+          file = Quotes(input.substr(5, errRedirect - 7));
           char* p = std::getenv("PATH");
           std::string filePath = GetPath(p, file);
           if (filePath == "") std::cout << file << std::endl;
