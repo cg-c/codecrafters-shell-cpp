@@ -100,7 +100,7 @@ int main() {
         // std::string file = tokens[tokens.size() - 1];
         // std::ofstream outputFile(file);
         // freopen(output.c_str(), "w", outputFile);
-        std::string input = input.substr(5, redirect - 6) + input.substr(redirect + 1);
+        std::string input = input.substr(5, redirect - 5) + tokens[tokens.size() - 1];
         std::cout << input << std::endl;
         system(input.c_str());
       }
