@@ -133,8 +133,9 @@ int main() {
       if (input[0] == '\'') {
         size_t last = input.find_last_of('\'');
         std::string file = input.substr(last + 2);
-        file = GetPath(file, file);
-        if (GetPath(std::getenv("PATH"), file) != "") system(file.c_str());
+        file = GetPath(std::getenv("PATH"), file);
+        // if (GetPath(std::getenv("PATH"), file) != "") 
+        system(file.c_str());
       }
       else if (input[0] == '\"') {
         size_t last = input.find_last_of('\"');
