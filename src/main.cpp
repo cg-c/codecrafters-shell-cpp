@@ -98,20 +98,28 @@ int main() {
 
       if (errRedirect != std::string::npos) {
         std::string file = "";
+        std::string output = "";
         
         if (tokens[1].at(0) == '\'') {
-          std::cout << tokens[1].at(0) << std::endl;
-          redirect = errRedirect;
+          output = input.substr(6, errRedirect - 8);
+          file = tokens[tokens.size() - 1];
         }
         else {
           file = input.substr(5, errRedirect - 7);
-          char* p = std::getenv("PATH");
-          std::string filePath = GetPath(p, file);
-          if (filePath == "") std::cout << file << std::endl;
+          output = tokens[tokens.size() - 1];
+        }
+
+        char* p = std::getenv("PATH");
+        std::string filePath = GetPath(p, file);
+        if (filePath == "") std::cout << file << std::endl;
+        else {
+          std::ofstream f;
+          f.open(file);
+          f << output << std::endl;
+          f.close();
         }
       }
-
-      if (redirect != std::string::npos) {
+      else if (redirect != std::string::npos) {
         std::string output = input.substr(6, redirect - 8);
         std::string file = tokens[tokens.size() - 1];
         std::ofstream f;
