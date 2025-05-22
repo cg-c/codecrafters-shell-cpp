@@ -101,7 +101,10 @@ int main() {
         std::string output = "";
         
         if (tokens[1].at(0) == '\'') {
-          std::cout << "" << std::endl;
+          std::string file = tokens[tokens.size() - 1];
+          std::ofstream f;
+          f.open(file);
+          f.close();
         }
         else  {
           file = input.substr(5, errRedirect - 7);
@@ -112,7 +115,9 @@ int main() {
 
           if (filePath == "") std::cout << file << std::endl;
           else {
-            // idk
+            std::ofstream f;
+            f.open(file);
+            f.close();
           }
         }
       }
