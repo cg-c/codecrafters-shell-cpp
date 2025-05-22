@@ -112,9 +112,10 @@ int main() {
         char* p = std::getenv("PATH");
         std::string filePath = GetPath(p, file);
         if (filePath == "") std::cout << file << std::endl;
-        else redirect = errDirect;
+        else redirect = errRedirect;
       }
-      else if (redirect != std::string::npos) {
+      
+      if (redirect != std::string::npos) {
         std::string output = input.substr(6, redirect - 8);
         std::string file = tokens[tokens.size() - 1];
         std::ofstream f;
