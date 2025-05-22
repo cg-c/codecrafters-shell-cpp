@@ -96,7 +96,7 @@ int main() {
       size_t redirect = input.find("1>");
 
       if (redirect != std::string::npos) {
-        std::string output = input.substr(6, redirect - 6);
+        std::string output = input.substr(6, redirect - 7);
         std::string file = tokens[tokens.size() - 1];
         std::ofstream f;
         f.open(file);
