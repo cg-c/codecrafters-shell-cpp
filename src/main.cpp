@@ -93,7 +93,7 @@ int main() {
     }
     else if (input == "exit 0") return 0;
     else if (tokens[0] == "echo") {
-      size_t redirect = input.find("1>");
+      size_t redirect = input.find("1>") || input.find("2>");
 
       if (redirect != std::string::npos) {
         std::string output = input.substr(6, redirect - 8);
