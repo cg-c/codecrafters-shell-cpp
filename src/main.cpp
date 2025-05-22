@@ -8,6 +8,7 @@
 #include <sstream>
 #include <cctype>
 #include <unistd.h>
+#include <fstream>
 #include <cstdio>
 
 std::vector<std::string> GetTokens(std::string input, char delime) {
