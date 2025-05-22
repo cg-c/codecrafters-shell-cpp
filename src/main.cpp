@@ -100,8 +100,7 @@ int main() {
         // std::string file = tokens[tokens.size() - 1];
         // std::ofstream outputFile(file);
         // freopen(output.c_str(), "w", outputFile);
-        std::string cmd = tokens[tokens.size()] + " > " + input.substr(5, redirect - 6);
-        std::cout << cmd << std::endl;;
+        std::string cmd = tokens[tokens.size() - 1] + " > " + input.substr(5, redirect - 6);
         system(cmd.c_str());
       }
       else if (tokens[1].at(0) == '\'' && input[input.size() - 1] == '\''){
