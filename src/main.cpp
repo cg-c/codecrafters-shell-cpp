@@ -101,7 +101,6 @@ int main() {
         // std::ofstream outputFile(file);
         // freopen(output.c_str(), "w", outputFile);
         std::string cmd = input.substr(5, redirect - 5) + input.substr(redirect + 1);
-        std::cout << cmd << std::endl;
         system(cmd.c_str());
       }
       else if (tokens[1].at(0) == '\'' && input[input.size() - 1] == '\''){
