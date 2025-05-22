@@ -7,6 +7,7 @@
 #include <cstring>
 #include <sstream>
 #include <cctype>
+#include <unistd.h>
 
 std::vector<std::string> GetTokens(std::string input, char delime) {
   std::stringstream ss(input);
@@ -133,10 +134,9 @@ int main() {
       if (input[0] == '\'') {
         size_t last = input.find_last_of('\'');
         std::string file = input.substr(last + 2);
-        file = GetPath(std::getenv("PATH"), file);
-        std::cout << file << std::endl;
-        // if (GetPath(std::getenv("PATH"), file) != "") 
-        system(file.c_str());
+        char* path = std::getenv("PATH");
+        file = GetPath(path, file);
+        execv(file);
       }
       else if (input[0] == '\"') {
         size_t last = input.find_last_of('\"');
