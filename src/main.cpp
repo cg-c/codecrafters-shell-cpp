@@ -97,7 +97,7 @@ int main() {
       if (redirect != std::string::npos) {
         std::string output = input.substr(5, redirect - 5);
         std::string file = tokens[tokens.size() - 1];
-        freopen(output, "w", file);
+        freopen(output.c_str(), "w", file.c_Str());
       }
       else if (tokens[1].at(0) == '\'' && input[input.size() - 1] == '\''){
         std::string print = Quotes(input.substr(5), '\'');
