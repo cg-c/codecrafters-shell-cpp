@@ -137,7 +137,7 @@ int main() {
         // char* path = std::getenv("PATH");
         // file = GetPath(path, file);
         // execv(file.c_str());
-        system(input.c_str())
+        system(input.c_str());
       }
       else if (input[0] == '\"') {
         size_t last = input.find_last_of('\"');
