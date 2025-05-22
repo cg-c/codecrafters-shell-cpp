@@ -96,7 +96,7 @@ int main() {
       size_t redirect = input.find("1>");
       size_t errRedirect = input.find("2>");
 
-      if (errRedirct != std::string::npos) {
+      if (errRedirect != std::string::npos) {
         std::string file = Quotes(input.substr(5, errRedirect - 6), '\'');
         char* p = std::getenv("PATH");
         std::string filePath = GetPath(p, file);
