@@ -98,6 +98,7 @@ int main() {
 
       if (errRedirect != std::string::npos) {
         std::string file = "";
+        std::cout << tokens[1] << std::endl;
         if (tokens[1][0] == '\'') {
           redirect = errRedirect;
         }
