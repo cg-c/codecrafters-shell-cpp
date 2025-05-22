@@ -100,15 +100,20 @@ int main() {
         std::string file = "";
         std::string output = "";
         
-        if (tokens[1].at(0) == '\'') file = input.substr(6, errRedirect - 8);
-        else file = input.substr(5, errRedirect - 7);
-          
-        output = tokens[tokens.size() - 1];
-        char* p = std::getenv("PATH");
-        std::string filePath = GetPath(p, file);
-        if (filePath == "") std::cout << file << std::endl;
-        else {
-          // idk
+        if (tokens[1].at(0) == '\'') {
+          redirect = errRedirect;
+        }
+        else  {
+          file = input.substr(5, errRedirect - 7);
+            
+          output = tokens[tokens.size() - 1];
+          char* p = std::getenv("PATH");
+          std::string filePath = GetPath(p, file);
+
+          if (filePath == "") std::cout << file << std::endl;
+          else {
+            // idk
+          }
         }
       }
       
