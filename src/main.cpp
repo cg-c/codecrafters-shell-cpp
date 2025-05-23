@@ -65,6 +65,14 @@ std::string GetPath(char* p, std::string file) {
   return "";
 }
 
+void WriteToFile(std::string msg, std::string file) {
+  std::ofstream f;
+  f.open(file);
+
+  if (!f.is_open()) f << msg << std::endl;
+  else f.close();
+}
+
 int main() {
   // Flush after every std::cout / std:cerr
   std::cout << std::unitbuf;
@@ -93,49 +101,31 @@ int main() {
     }
     else if (input == "exit 0") return 0;
     else if (tokens[0] == "echo") {
-      size_t redirect = input.find("1>");
-      size_t errRedirect = input.find("2>");
+      size_t redirectStdout = input.find("1>");
+      size_t errStd = input.find("2>");
+      size_t appenedStdout = input.find("1>>");
 
-      if (errRedirect != std::string::npos) {
+      if (errStd != std::string::npos) {
         std::string file = "";
         std::string output = "";
         
-        if (tokens[1].at(0) == '\'') {
-          // file = tokens[tokens.size() - 1];
-          output = input.substr(6, errRedirect - 8);
-          // char* p = std::getenv("PATH");
-          // std::string filePath = GetPath(p, file);
-          // std::ofstream f;
-          // f.open(file);
-          // // f << output << std::endl;
-          // f.close();
-        }
-        else  {
-          output = input.substr(5, errRedirect - 7);
-        }
-        file = tokens[tokens.size() - 1];
-          
-          // char* p = std::getenv("PATH");
-          // std::string filePath = GetPath(p, file);
+        if (tokens[1].at(0) == '\'') input.substr(6, redirectStdout - 8);
+        else  output = input.substr(5, errStd - 7);
 
-          // if (filePath == "") std::cout << file << std::endl;
-          // else {
-            std::ofstream f;
-            f.open(file);
-            if (!f.is_open()) f << output << std::endl;
-            else f.close();
-            std::cout << output << std::endl;
-          // }
-        }
-      // }
-      else if (redirect != std::string::npos) {
-        std::string output = input.substr(6, redirect - 8);
-        std::string file = tokens[tokens.size() - 1];
-        std::ofstream f;
-        f.open(file);
-        f << output << std::endl;
-        f.close();
+        file = tokens[tokens.size() - 1];
+        WriteToFile(output, file);
+        std::cout << output << std::endl;
       }
+      else if (redirectStdout != std::string::npos || appendStdout != std::string::npos) {
+        std::string output = input.substr(6, redirectStdout - 8);
+        std::string file = tokens[tokens.size() - 1];
+        WriteToFile(output, file);
+      }
+      // else if (appendStdout != std::string::npos) {
+      //   std::string output = input.substr(6, redirectStdout - 8);
+      //   std::string file = tokens[tokens.size() - 1];
+      //   WriteToFile(output, file);
+      // }
       else if (tokens[1].at(0) == '\'' && input[input.size() - 1] == '\''){
         std::string print = Quotes(input.substr(5), '\'');
         std::cout << print << std::endl;
