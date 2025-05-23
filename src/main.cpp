@@ -108,8 +108,8 @@ int main() {
         file = tokens[tokens.size() - 1];
         std::ofstream f;
         f.open(file);
-        if (f.is_open()) f.close();
-        else f << output << std::endl;
+        f << output << std::endl;
+        f.close();
         std::cout << output << std::endl;
       }
       else if (appendStdout != std::string::npos) {
