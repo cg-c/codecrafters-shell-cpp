@@ -103,7 +103,7 @@ int main() {
     else if (tokens[0] == "echo") {
       size_t redirectStdout = input.find("1>");
       size_t errStd = input.find("2>");
-      size_t appenedStdout = input.find("1>>");
+      size_t appendStdout = input.find("1>>");
 
       if (errStd != std::string::npos) {
         std::string file = "";
