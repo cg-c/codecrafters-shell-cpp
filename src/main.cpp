@@ -69,7 +69,7 @@ void WriteToFile(std::string msg, std::string file) {
   std::ofstream f;
   f.open(file);
   f << msg << std::endl;
-  else f.close();
+  f.close();
 }
 
 int main() {
