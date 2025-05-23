@@ -124,7 +124,7 @@ int main() {
         std::string output = input.substr(6, appendStdout - 8);
         std::string file = tokens[tokens.size() - 1];
         std::ofstream f;
-        f.open(file, std::ofstream::app;);
+        f.open(file, std::ofstream::app);
         f << msg << std::endl;
         f.close();
       }
