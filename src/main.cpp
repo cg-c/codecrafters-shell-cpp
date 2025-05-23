@@ -115,11 +115,6 @@ int main() {
         WriteToFile(output, file);
         std::cout << output << std::endl;
       }
-      else if (redirectStdout != std::string::npos) {
-        std::string output = input.substr(6, redirectStdout - 8);
-        std::string file = tokens[tokens.size() - 1];
-        WriteToFile(output, file);
-      }
       else if (appendStdout != std::string::npos) {
         std::string output = input.substr(6, appendStdout - 8);
         std::string file = tokens[tokens.size() - 1];
@@ -127,6 +122,11 @@ int main() {
         f.open(file, std::ofstream::app);
         f << output << std::endl;
         f.close();
+      }
+      else if (redirectStdout != std::string::npos) {
+        std::string output = input.substr(6, redirectStdout - 8);
+        std::string file = tokens[tokens.size() - 1];
+        WriteToFile(output, file);
       }
       else if (tokens[1].at(0) == '\'' && input[input.size() - 1] == '\''){
         std::string print = Quotes(input.substr(5), '\'');
