@@ -68,8 +68,7 @@ std::string GetPath(char* p, std::string file) {
 void WriteToFile(std::string msg, std::string file) {
   std::ofstream f;
   f.open(file);
-
-  if (!f.is_open()) f << msg << std::endl;
+  f << msg << std::endl;
   else f.close();
 }
 
@@ -116,16 +115,17 @@ int main() {
         WriteToFile(output, file);
         std::cout << output << std::endl;
       }
-      else if (redirectStdout != std::string::npos || appendStdout != std::string::npos) {
+      else if (redirectStdout != std::string::npos) {
         std::string output = input.substr(6, redirectStdout - 8);
         std::string file = tokens[tokens.size() - 1];
         WriteToFile(output, file);
       }
-      // else if (appendStdout != std::string::npos) {
-      //   std::string output = input.substr(6, redirectStdout - 8);
-      //   std::string file = tokens[tokens.size() - 1];
-      //   WriteToFile(output, file);
-      // }
+      else if (appendStdout != std::string::npos) {
+        std::string output = input.substr(6, redirectStdout - 8);
+        std::string file = tokens[tokens.size() - 1];
+        // std::ofstream::app;
+        WriteToFile(output, file);
+      }
       else if (tokens[1].at(0) == '\'' && input[input.size() - 1] == '\''){
         std::string print = Quotes(input.substr(5), '\'');
         std::cout << print << std::endl;
