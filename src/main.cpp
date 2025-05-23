@@ -96,8 +96,12 @@ int main() {
     else if (tokens[0] == "echo") {
       size_t redirectStdout = input.find(">");
       size_t errStd = input.find("2>");
+      size_t errAppStd = input.find("2>>");
       size_t appendStdout = input.find(">>");
 
+      if (errAppStd != std::string::npos) {
+        errStd = errAppStd;
+      }
       if (errStd != std::string::npos) {
         std::string file = "";
         std::string output = "";
@@ -109,7 +113,7 @@ int main() {
         std::ofstream f;
         f.open(file);
         if (!f.is_open()) f << output << std::endl;
-        else f.close();
+        f.close();
         std::cout << output << std::endl;
       }
       else if (appendStdout != std::string::npos) {
