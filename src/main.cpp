@@ -127,7 +127,7 @@ int main() {
           // }
         }
       // }
-      else if (redirect != std::string::npos) {
+      if (redirect != std::string::npos) {
         std::string output = input.substr(6, redirect - 8);
         std::string file = tokens[tokens.size() - 1];
         std::ofstream f;
