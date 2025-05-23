@@ -125,7 +125,7 @@ int main() {
         std::string file = tokens[tokens.size() - 1];
         std::ofstream f;
         f.open(file, std::ofstream::app);
-        f << msg << std::endl;
+        f << output << std::endl;
         f.close();
       }
       else if (tokens[1].at(0) == '\'' && input[input.size() - 1] == '\''){
