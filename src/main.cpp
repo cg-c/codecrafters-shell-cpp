@@ -123,8 +123,10 @@ int main() {
       else if (appendStdout != std::string::npos) {
         std::string output = input.substr(6, appendStdout - 8);
         std::string file = tokens[tokens.size() - 1];
-        // std::ofstream::app;
-        WriteToFile(output, file);
+        std::ofstream f;
+        f.open(file, std::ofstream::app;);
+        f << msg << std::endl;
+        f.close();
       }
       else if (tokens[1].at(0) == '\'' && input[input.size() - 1] == '\''){
         std::string print = Quotes(input.substr(5), '\'');
