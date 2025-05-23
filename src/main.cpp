@@ -108,7 +108,7 @@ int main() {
         std::string file = "";
         std::string output = "";
         
-        if (tokens[1].at(0) == '\'') input.substr(6, redirectStdout - 8);
+        if (tokens[1].at(0) == '\'') input.substr(6, errStd - 8);
         else  output = input.substr(5, errStd - 7);
 
         file = tokens[tokens.size() - 1];
@@ -121,7 +121,7 @@ int main() {
         WriteToFile(output, file);
       }
       else if (appendStdout != std::string::npos) {
-        std::string output = input.substr(6, redirectStdout - 8);
+        std::string output = input.substr(6, appendStdout - 8);
         std::string file = tokens[tokens.size() - 1];
         // std::ofstream::app;
         WriteToFile(output, file);
