@@ -107,7 +107,7 @@ int main() {
           std::string filePath = GetPath(p, file);
           std::ofstream f;
           f.open(file);
-          f << output << std::endl;
+          // f << output << std::endl;
           f.close();
         }
         else  {
