@@ -102,7 +102,7 @@ int main() {
         std::string file = "";
         std::string output = "";
         
-        if (tokens[1].at(0) == '\'') input.substr(6, errStd - 8);
+        if (tokens[1].at(0) == '\'') output = input.substr(6, errStd - 8);
         else  output = input.substr(5, errStd - 7);
 
         file = tokens[tokens.size() - 1];
