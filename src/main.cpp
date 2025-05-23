@@ -109,6 +109,7 @@ int main() {
         std::ofstream f;
         f.open(file);
         if (f.is_open()) f.close();
+        else f << output << std::endl;
         std::cout << output << std::endl;
       }
       else if (appendStdout != std::string::npos) {
