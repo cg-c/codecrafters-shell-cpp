@@ -122,8 +122,7 @@ int main() {
           // else {
             std::ofstream f;
             f.open(file);
-            if (!f.is_open()) std::cout << output << std::endl;
-            // f << output << std::endl;
+            if (!f.is_open()) f << output << std::endl;
             else f.close();
           // }
         }
