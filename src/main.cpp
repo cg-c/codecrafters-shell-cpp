@@ -102,7 +102,7 @@ int main() {
         
         if (tokens[1].at(0) == '\'') {
           // file = tokens[tokens.size() - 1];
-          output = input.substr(6, redirect - 8);
+          output = input.substr(6, errRedirect - 8);
           // char* p = std::getenv("PATH");
           // std::string filePath = GetPath(p, file);
           // std::ofstream f;
