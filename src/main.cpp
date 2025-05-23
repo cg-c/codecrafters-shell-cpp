@@ -113,8 +113,8 @@ int main() {
         else  {
           file = input.substr(5, errRedirect - 7);
         }
-            
-          // output = tokens[tokens.size() - 1];
+        output = tokens[tokens.size() - 1];
+          
           // char* p = std::getenv("PATH");
           // std::string filePath = GetPath(p, file);
 
@@ -122,12 +122,13 @@ int main() {
           // else {
             std::ofstream f;
             f.open(file);
+            if (!f.is_open()) std::cout << output << std::endl;
             // f << output << std::endl;
-            f.close();
+            else f.close();
           // }
         }
       // }
-      if (redirect != std::string::npos) {
+      else if (redirect != std::string::npos) {
         std::string output = input.substr(6, redirect - 8);
         std::string file = tokens[tokens.size() - 1];
         std::ofstream f;
