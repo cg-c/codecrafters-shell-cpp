@@ -103,8 +103,8 @@ int main() {
         if (tokens[1].at(0) == '\'') {
           file = tokens[tokens.size() - 1];
           output = input.substr(6, redirect - 8);
-          char* p = std::getenv("PATH");
-          std::string filePath = GetPath(p, file);
+          // char* p = std::getenv("PATH");
+          // std::string filePath = GetPath(p, file);
           std::ofstream f;
           f.open(file);
           // f << output << std::endl;
@@ -112,18 +112,19 @@ int main() {
         }
         else  {
           file = input.substr(5, errRedirect - 7);
+        }
             
-          output = tokens[tokens.size() - 1];
-          char* p = std::getenv("PATH");
-          std::string filePath = GetPath(p, file);
+          // output = tokens[tokens.size() - 1];
+          // char* p = std::getenv("PATH");
+          // std::string filePath = GetPath(p, file);
 
-          if (filePath == "") std::cout << file << std::endl;
-          else {
+          // if (filePath == "") std::cout << file << std::endl;
+          // else {
             std::ofstream f;
             f.open(file);
-            f << output << std::endl;
+            // f << output << std::endl;
             f.close();
-          }
+          // }
         }
       }
       
