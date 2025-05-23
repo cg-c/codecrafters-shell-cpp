@@ -100,9 +100,9 @@ int main() {
     }
     else if (input == "exit 0") return 0;
     else if (tokens[0] == "echo") {
-      size_t redirectStdout = input.find("1>");
+      size_t redirectStdout = input.find(">");
       size_t errStd = input.find("2>");
-      size_t appendStdout = input.find("1>>");
+      size_t appendStdout = input.find(">>");
 
       if (errStd != std::string::npos) {
         std::string file = "";
@@ -116,7 +116,7 @@ int main() {
         std::cout << output << std::endl;
       }
       else if (appendStdout != std::string::npos) {
-        std::string output = input.substr(6, appendStdout - 8);
+        std::string output = input.substr(6, appendStdout - 9);
         std::string file = tokens[tokens.size() - 1];
         std::ofstream f;
         f.open(file, std::ofstream::app);
@@ -124,7 +124,7 @@ int main() {
         f.close();
       }
       else if (redirectStdout != std::string::npos) {
-        std::string output = input.substr(6, redirectStdout - 8);
+        std::string output = input.substr(6, redirectStdout - 9);
         std::string file = tokens[tokens.size() - 1];
         WriteToFile(output, file);
       }
